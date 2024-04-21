@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporary Links</title>
+    <
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 90px);
+            margin-right: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .last-reset, .next-reset {
+            position: fixed;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .last-reset {
+            top: 10px;
+            right: 10px;
+        }
+
+        .next-reset {
+            top: 50px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Temporary Links</h1>
+    {% for category, links in active_links.items() %}
+    <div class="category mb-4">
+        <h2>{{ category }}</h2>
+        <ul class="list-group">
+            {% for link in links %}
+                <li class="list-group-item">{{ link }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+        <form action="/add" method="POST" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="category" class="form-control" placeholder="Category" required>
+                <input type="text" name="content" class="form-control" placeholder="Enter link/text" required>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript pour mettre à jour la date de la dernière réinitialisation
+        document.getElementById('lastReset').innerText = new Date().toLocaleString();
+
+        // JavaScript pour mettre à jour la date de la prochaine réinitialisation
+        var nextReset = new Date();
+        nextReset.setDate(nextReset.getDate() + 2); // Réinitialisation dans 48 heures
+        document.getElementById('nextReset').innerText = nextReset.toLocaleString();
+    </script>
+</body>
+</html>
